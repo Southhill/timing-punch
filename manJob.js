@@ -1,7 +1,8 @@
 const schedule = require('node-schedule')
 
 const { logger, errorLogger } = require('./log')
-const { punchListRequestBody } = require('./const')
+const { punchListRequestBody, punchUrl } = require('./const')
+const { getRandomRange } = require('./util')
 
 class ManJob {
     constructor(name) {
