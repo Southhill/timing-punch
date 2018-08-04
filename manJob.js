@@ -30,7 +30,8 @@ class ManJob {
 
 function getPunchTime() {
     let firstTime, lastTime
-    const dt = new Date()
+    const cudt = new Date().toLocaleDateString()
+    const dt = new Date(cudt)
     const firstHour = getRandomRange(8, 9)
     const firstMinute = getRandomRange(0, 59)
     const lastMinute = firstMinute + getRandomRange(1, 59)
