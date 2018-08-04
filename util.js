@@ -9,16 +9,17 @@ function padStr(num, digit = 2, pad = '0') {
 }
 
 function getCurrentDate() {
-    const dt = new Date()
-    const year = dt.getFullYear()
-    const month = padStr(dt.getMonth() + 1)
-    const day = padStr(dt.getDate())
+    const dtStr = new Date().toLocaleDateString()
+    const ymd = dtStr.split('/')
+    const year = ymd[0]
+    const month = padStr(ymd[1])
+    const day = padStr(ymd[2])
     return `${year}${month}${day}`
 }
 
 function getRandomRange(min, max) {
     const rangeNum = max - min
-    return Math.floor(Math.random() * rangeNum) + min
+    return Math.round(Math.random() * rangeNum) + min
 }
 
 module.exports = {

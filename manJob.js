@@ -30,16 +30,20 @@ class ManJob {
 
 function getPunchTime() {
     let firstTime, lastTime
-    let dt = new Date()
-    let firstHour = getRandomRange(8, 9)
+    const dt = new Date()
+    const firstHour = getRandomRange(8, 9)
+    const firstMinute = getRandomRange(0, 59)
+    const lastMinute = firstMinute + getRandomRange(1, 59)
     dt.setHours(firstHour)
-    dt.setMinutes(getRandomRange(0, 59))
+    dt.setMinutes(firstMinute)
     dt.setSeconds(getRandomRange(0, 59))
     firstTime = new Date(dt)
-    dt.setHours(firstHour + 10)
-    dt.setMinutes(getRandomRange(0, 59))
+
+    dt.setHours(firstHour + 9 + getRandomRange(0, 2))
+    dt.setMinutes(lastMinute)
     dt.setSeconds(getRandomRange(0, 59))
     lastTime = new Date(dt)
+
     return [firstTime, lastTime]
 }
 
