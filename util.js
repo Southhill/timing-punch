@@ -9,7 +9,7 @@ function padStr(num, digit = 2, pad = '0') {
 }
 
 function getCurrentDate() {
-    const dtStr = new Date().toLocaleDateString()
+    const dtStr = new Date().toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai' })
     const ymd = dtStr.split('/')
     const year = ymd[0]
     const month = padStr(ymd[1])
