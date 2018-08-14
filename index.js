@@ -13,13 +13,13 @@ const checkIsWeekDay = async function() {
     return !res.data.data
 }
 
-schedule.scheduleJob(scheduleTime, async function() {
-// schedule.scheduleJob('30 * * * * *', async function() { // '30 * * * * *'
+// schedule.scheduleJob(scheduleTime, async function() {
+schedule.scheduleJob('30 * * * * *', async function() { // '30 * * * * *'
     const isWeekDay = await checkIsWeekDay()
     logger.info('当前日期是否为工作日：', isWeekDay)
     if (isWeekDay) {
         logger.info('开始生成当日的全部定时任务')
-        ManJob('章三')
+        new ManJob('章三')
     } else {
         logger.info('当前日期不是工作日，不需要定时任务。')
     }

@@ -4,3 +4,5 @@
 .history
 
 node_modules
+
+*.log
