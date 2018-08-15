@@ -1,4 +1,5 @@
 const schedule = require('node-schedule')
+const axios = require('axios')
 
 const { logger, errorLogger } = require('./log')
 const { punchListRequestBody, punchUrl } = require('./const')
@@ -11,18 +12,19 @@ class ManJob {
         logger.info(`当前定时任务的属主是：${this.name}`)
         const [firstTime, lastTime] = getPunchTime()
         logger.info('当日定时任务时间为：', firstTime.toLocaleString(), lastTime.toLocaleString())
-        // schedule.scheduleJob(new Date(), await fetchPunch)
-        schedule.scheduleJob(firstTime, this.fetchPunch)
-        schedule.scheduleJob(lastTime, this.fetchPunch)
+        // schedule.scheduleJob(new Date(), this.fetchPunch.bind(this))
+        schedule.scheduleJob(firstTime, this.fetchPunch.bind(this))
+        schedule.scheduleJob(lastTime, this.fetchPunch.bind(this))
         logger.info(`属主${this.name}的定时任务生成完成`)
     }
 
     async fetchPunch() {
+        const name = this.name
         try {
-            await axios.post(punchUrl, punchListRequestBody[this.name])
-            logger.info(`${new Date().toLocaleString()}时刻属主${this.name}打卡成功！`)
+            await axios.post(punchUrl, punchListRequestBody[name])
+            logger.info(`${new Date().toLocaleString()}时刻属主${name}打卡成功！`)
         } catch(err) {
-            errorLogger.error(`${new Date().toLocaleString()}时刻属主${this.name}打卡失败`)
+            logger.error(`${new Date().toLocaleString()}时刻属主${name}打卡失败, 失败原因请查看error.log文件`)
             errorLogger.error(`punch error: `, err)
         }
     }
